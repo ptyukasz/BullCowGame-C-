@@ -1,2 +1,3 @@
-# BullCowGame-C-
-Udemy tutorial of the fundamentals of C++ as well as OOP with C++
+# Section_02
+Beginner C++ Console Game
+#Udemy Unreal 4 tutorial
