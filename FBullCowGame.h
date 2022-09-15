@@ -1,26 +1,28 @@
 #pragma once
 #include <string>
-// notice me
-class FBullCowGame {
+using Fstring = std::string;
+using int32 = int;
+struct BullCowCount
+{
+	int32 Bulls = 0;
+	int32 Cows = 0;
+};
+
+class FBullCowGame 
+
+{
 public:
-	FBullCowGame(); //Constructor
+	FBullCowGame();
 	void Reset(); // TODO more rich value;
-	int GetMaxTries() const;
-	int GetCurrentTry ()const;
+	int32 GetMaxTries() const;
+	int32 GetCurrentTry()const;
 	bool IsGamWon() const;
-	
-	void Reset();
-	bool CheckGuessValidity(std::string); //TODO make a more rich return value;
-	//provide a method for counting bulls & cows, and increasing turn #
-
-
-
+	bool CheckGuessValidity(Fstring); //TODO make a more rich return value
+	BullCowCount SubmitGuess(Fstring);
 
 private:
 	// see constructor for initialization
-	int MyCurrentTry;
-	int MyMaxTries;
-
+	int32 MyCurrentTry =1;
+	int32 MyMaxTries =5;
 };
 		
-
