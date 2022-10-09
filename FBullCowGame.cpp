@@ -2,21 +2,24 @@
 #include "FBullCowGame.h"
 
 using int32 = int;
-int32 FBullCowGame::GetCurrentTry() const { return MyMaxTries; }
-int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
+
+
 
 // 
 FBullCowGame::FBullCowGame(){Reset();} //constructor
+int32 FBullCowGame::GetCurrentTry() const { return MyMaxTries; }
+int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length();}
 
-
-
-
+int32 FBullCowGame::GetMaxTries() const
+{
+	return 8;
+}
 
 void FBullCowGame::Reset() {
-	constexpr  int32 MAX_TRIES = 8;
+	constexpr  int32 MAX_TRIES =5;
 	MyMaxTries = MAX_TRIES;
 	MyCurrentTry = 1;
-	const Fstring HIDDEN_WORD = "planet";
+	const Fstring HIDDEN_WORD = "plane";
 	MyHiddenWord = HIDDEN_WORD;
 	return;
 }
@@ -25,43 +28,36 @@ void FBullCowGame::Reset() {
 // recieves a VALID guess, increments turn, and returns count
 FBullCowCount FBullCowGame::SubmitGuess(Fstring Guess)
 {
-	
-	//increment the turn number
 	MyCurrentTry++;
-//setup a return variable
 	FBullCowCount BullCowCount;
-// loop through all letters in the guess
 	int32 HiddenWordLength = MyHiddenWord.length();
-	for (int32 i = 0; i < HiddenWordLength; i++) 
+
+	for (int32 MHWChar = 0; MHWChar < HiddenWordLength; MHWChar++) 
 	{
 		
-	}
+	
 	
 	//compare letters against the hidden word
- 	for (int32 j = 0; j < HiddenWordLength; j++) 
-	{
+ 			for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) 
+			{
 
-		if (Guess == MyHiddenWord) {
-			BullCowCount.Bulls++;
-		}
-			else if (Guess != MyHiddenWord) {
-
-				BullCowCount.Cows++;
+				if (Guess[GChar] == MyHiddenWord[MHWChar])
+				{
+					if (MHWChar == GChar) 
+					{
+						BullCowCount.Bulls++;
+					}
+					else 
+					{
+						BullCowCount.Cows++;
+					}
+				}
+					
 			}
-
-			else {
-				BullCowCount.Cows++;
-			}
-			
 	}
-		// if they match then
-	// incriment bulls if they're in the same place
-				// incriment cows if not
-			//compare letters against the hidden word
-			//else
-				//incriment cows
 	return BullCowCount;
-}
+
+}	
 
 
 
@@ -70,9 +66,30 @@ bool FBullCowGame::IsGamWon() const
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(Fstring) const
+
+
+EGuessStatus FBullCowGame::CheckGuessValidity(Fstring Guess) const
 {
-	return false;
+	if (false) 
+	{
+		return EGuessStatus::Not_Isogram;
+	}
+	else if (false) 
+	{
+		return EGuessStatus::Not_Lowercase;
+	}
+	else if (Guess.length() != GetHiddenWordLength())
+	{
+		return EGuessStatus::Wrong_Length;
+	}
+
+	//if the guess isn't an isogram
+	// if the guess isn't the right word length
+	// if the guess isn't all lowercase
+	else
+	{
+		return EGuessStatus::OK;
+	}
 }
 
 
