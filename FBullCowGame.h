@@ -31,18 +31,27 @@ public:
 
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry()const;
-	bool IsGamWon() const;
 	int32 GetHiddenWordLength()const;
+	bool IsGameWon() const;
+	bool GameIsWon()const;
+	bool IsIsogram()const;
+	
 	EGuessStatus CheckGuessValidity(Fstring) const;
-	FBullCowCount SubmitGuess(Fstring);
+	bool IsIsogram();
+	FBullCowCount SubmitValidGuess(Fstring);
 	void Reset();
 
 
 private:
 	// see constructor for initialization
 	int32 MyCurrentTry;
-	int32 MyMaxTries ;
+	int32 MyMaxTries;
 	Fstring MyHiddenWord;
+	bool bGameIsWon;
+
+
+	bool IsIsogram(Fstring)const;
+	bool IsLowercase(Fstring)const;
 };
 
    
